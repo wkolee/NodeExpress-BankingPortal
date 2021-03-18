@@ -1,10 +1,16 @@
+<%- include('header'); %>
 <div class='container'>
-    <%- include('header') -%>
-    <h1>
-     <%- 'title' -%>
-    </h1>
-
-    <a src='/profile'>Profile</a>
+    <h1><%= title %></h1>
+    <a href='/profile'>Profile</a>
 </div>
-<a src='/transfer'>Transfer</a>
-<%- include('footer') -%>
+
+
+
+<% Object.keys(accounts).forEach(function(key) { %>
+    <option value="<%= accounts[key] %>">
+        <%= key %>
+    </option>
+    <% }); %>
+
+<a href='/transfer'>Transfer</a>
+<%- include('footer'); %>
