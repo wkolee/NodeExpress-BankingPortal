@@ -6,11 +6,9 @@
 
 
 
-<% Object.keys(accounts).forEach(function(key) { %>
-    <option value="<%= accounts[key] %>">
-        <%= key %>
-    </option>
-    <% }); %>
+
+<%- include('summary'); %>
+
 
 <a href='/transfer'>Transfer</a>
 <%- include('footer'); %>
