@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const data = require('./data');
+const accountRoutes = require('./routes/accounts');
+const servicesRoutes = require('./routes/services');
 
 //initailze the express object
 const app = express();
@@ -11,49 +14,33 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 
-//static views
+//middleware 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({extended:true}));
 
-//read file
-const accountData = fs.readFileSync('../src/json/accounts.json', 'utf8');
-//parse json object
-const accounts = JSON.parse(accountData);
 
-//read users file 
-const userData = fs.readFileSync('../src/json/users.json', 'utf8');
-//parse object
-const users = JSON.parse(userData);
+
+//data
+const {accounts, users, writeJSON} = data;
 
 //route
 app.get('/', (req, res)=>{
-    console.log(accounts.savings)
+    //console.log(accounts.savings)
     res.render('index', {title:'Account Summary', accounts: accounts})
 });
 
-//saving route
-app.get('/savings', (req, res)=>{
-    res.render('account', {account: accounts.savings});
-});
-
-//checking route
-app.get('/checking', (req, res)=>{
-    res.render('account', {account: accounts.checking});
-});
-
-//credit route
-app.get('/credit', (req, res)=>{
-    console.log(accounts.checking)
-    res.render('account', {account: accounts.credit});
-});
 
 //profile route
 app.get('/profile', (req, res)=>{
     //console.log(accounts.checking)
-    console.log(users[0])
     res.render('profile', {user: users[0]});
 });
 
 
+
+
+app.use('/account', accountRoutes);
+app.use('/services', servicesRoutes);
 //server
 app.listen(3000, ()=>{
     console.log("PS Project Running on port 3000!")
