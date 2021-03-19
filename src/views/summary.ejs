@@ -1,10 +1,10 @@
-<h1><%= accounts.nickname %></h1>
+<h1><%= account.nickname %></h1>
 
 <table class="data-panel">
   <tr>
     <th>Name</th>
     <th>Account Number</th>
-    <% if (accounts.unique_name == 'credit') { %>
+    <% if (account.unique_name == 'credit') { %>
       <th>Available Balance</th>
     <% } else { %>
       <th>Prior Balance</th>
@@ -12,14 +12,14 @@
     <th>Current Balance</th>
   </tr>
   <tr>
-    <td><a href="/<%= accounts.unique_name %>"><%= accounts.nickname %></a></td>
-    <td><%= accounts.account_number %></td>
-    <% if (accounts.unique_name == 'credit') { %>
-      <td>$<%= accounts.available %></td>
+    <td><a href="/<%= account.unique_name %>"><%= account.nickname %></a></td>
+    <td><%= account.account_number %></td>
+    <% if (account.unique_name == 'credit') { %>
+      <td>$<%= account.available %></td>
     <% } else { %>
-      <td>$<%= accounts.prior_balance %></td>
+      <td>$<%= account.prior_balance %></td>
     <% } %>
     
-    <td>$<%= accounts.balance %></td>
+    <td>$<%= account.balance %></td>
   </tr>
 </table>

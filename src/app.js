@@ -43,7 +43,7 @@ app.get('/checking', (req, res)=>{
 //credit route
 app.get('/credit', (req, res)=>{
     console.log(accounts.checking)
-    res.render('credit', {account: accounts.credit});
+    res.render('account', {account: accounts.credit});
 });
 
 //profile route
